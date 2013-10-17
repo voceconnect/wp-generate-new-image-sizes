@@ -39,11 +39,13 @@ class WP_Generate_New_Image_Sizes {
 		if ( $size && !empty($size_data) && $file && preg_match( '!^image/!', get_post_mime_type( $attachment ) ) && self::file_is_displayable_image( $file ) ) {
 			if(function_exists('wp_get_image_editor')){
 				$editor = wp_get_image_editor($file);
-				$new_size = $editor->multi_resize( array( $size => $size_data ) );
-				if ( empty( $metadata['sizes'] ) ) {
-					$metadata['sizes'] = $new_size;
-				} else {
-					$metadata['sizes'] = array_merge( $metadata['sizes'], $new_size );
+				if( !is_wp_error( $editor ) && $editor ){
+					$new_size = $editor->multi_resize( array( $size => $size_data ) );
+					if ( empty( $metadata['sizes'] ) ) {
+						$metadata['sizes'] = $new_size;
+					} else {
+						$metadata['sizes'] = array_merge( $metadata['sizes'], $new_size );
+					}
 				}
 			} else {
 				extract($size_data);
