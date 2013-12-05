@@ -1,0 +1,14 @@
+{
+    "name": "voceconnect/wp-generate-new-image-sizes",
+    "description": "Generates newly sized images upon request of new registered image size",
+    "license": "GPLv2+",
+    "authors": [
+        {
+            "name": "Kevin Langley",
+            "email": "kevin@voceconnect.com"
+        }
+    ],
+    "autoload": {
+        "files": ["wp-generate-new-image-sizes.php"]
+    }
+}
