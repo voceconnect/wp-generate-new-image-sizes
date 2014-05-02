@@ -84,6 +84,8 @@ class WP_Generate_New_Image_Sizes {
 			}
 		} else {
 			// if file doesn't exist locally fetch the file and store in the location we're expecting it to be in...
+			if ( !file_exists( dirname($filepath) ) )
+				mkdir(dirname($filepath), 0777, true);
 			$response = wp_remote_get( wp_get_attachment_url( $attachment_id ) );
 			if( wp_remote_retrieve_response_code( $response ) == 200 ){
 				file_put_contents( $filepath, wp_remote_retrieve_body( $response ) );
