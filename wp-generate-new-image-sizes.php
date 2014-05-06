@@ -73,7 +73,7 @@ class WP_Generate_New_Image_Sizes {
 	}
 
 	private static function _load_image_to_edit_path( $attachment_id, $size = 'full' ) {
-		if(function_exists('_load_image_to_edit_path'))
+		if( function_exists('_load_image_to_edit_path') && file_exists( $filepath ) )
 			return _load_image_to_edit_path($attachment_id, $size);
 
 		$filepath = get_attached_file( $attachment_id );

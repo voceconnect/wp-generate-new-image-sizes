@@ -5,7 +5,7 @@ Contributors: kevinlangleyjr, voceplatforms
 Tags: image, sizes, resize  
 Requires at least: 3.3  
 Tested up to: 3.9  
-Stable tag: 1.2  
+Stable tag: 1.3  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ if( ! class_exists( 'WP_Generate_New_Image_Sizes' ) ) {
 Upon request of image with a newly registered size, the plugin will generate a new image file with that specific size
 
 # Changelog
+
+**1.3**  
+*Using our own `_load_image_to_edit_path` if the file does not exist.*
 
 **1.2**  
 *Making directory for file if it does not exist - related to the fix for 1.1.*
