@@ -3,7 +3,7 @@
 Plugin Name: WP Generate New Image Sizes
 Plugin URI: http://voceconnect.com/
 Description: Generates new images added to the theme
-Version: 1.2
+Version: 1.3.1
 Author: Kevin Langley
 Author URI: http://voceconnect.com/
 */
@@ -73,10 +73,10 @@ class WP_Generate_New_Image_Sizes {
 	}
 
 	private static function _load_image_to_edit_path( $attachment_id, $size = 'full' ) {
+		$filepath = get_attached_file( $attachment_id );
+
 		if( function_exists('_load_image_to_edit_path') && file_exists( $filepath ) )
 			return _load_image_to_edit_path($attachment_id, $size);
-
-		$filepath = get_attached_file( $attachment_id );
 
 		if ( $filepath && file_exists( $filepath ) ) {
 			if ( 'full' != $size && ( $data = image_get_intermediate_size( $attachment_id, $size ) ) ) {
