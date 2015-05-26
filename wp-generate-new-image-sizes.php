@@ -3,7 +3,7 @@
 Plugin Name: WP Generate New Image Sizes
 Plugin URI: http://voceconnect.com/
 Description: Generates new images added to the theme
-Version: 1.3.1
+Version: 1.3.2
 Author: Kevin Langley
 Author URI: http://voceconnect.com/
 */
@@ -78,17 +78,21 @@ class WP_Generate_New_Image_Sizes {
 		if( function_exists('_load_image_to_edit_path') && file_exists( $filepath ) )
 			return _load_image_to_edit_path($attachment_id, $size);
 
-		if ( $filepath && file_exists( $filepath ) ) {
-			if ( 'full' != $size && ( $data = image_get_intermediate_size( $attachment_id, $size ) ) ) {
-				$filepath = apply_filters( 'load_image_to_edit_filesystempath', path_join( dirname( $filepath ), $data['file'] ), $attachment_id, $size );
-			}
-		} else {
-			// if file doesn't exist locally fetch the file and store in the location we're expecting it to be in...
-			$response = wp_remote_get( wp_get_attachment_url( $attachment_id ) );
-			if( wp_remote_retrieve_response_code( $response ) == 200 ){
-				if ( !file_exists( dirname($filepath) ) )
-					mkdir(dirname($filepath), 0777, true);
-				file_put_contents( $filepath, wp_remote_retrieve_body( $response ) );
+		if ( $filepath ) {
+			if ( file_exists( $filepath ) ) {
+				if ( 'full' != $size && ( $data = image_get_intermediate_size( $attachment_id, $size ) ) ) {
+					$filepath = apply_filters( 'load_image_to_edit_filesystempath', path_join( dirname( $filepath ), $data['file'] ), $attachment_id, $size );
+				}
+			} else {
+				// if file doesn't exist locally fetch the file and store in the location we're expecting it to be in...
+				$response = wp_remote_get( wp_get_attachment_url( $attachment_id ) );
+				if( wp_remote_retrieve_response_code( $response ) == 200 ){
+					if ( !file_exists( dirname($filepath) ) )
+						mkdir(dirname($filepath), 0777, true);
+
+					if ( is_writable($filepath) )
+						file_put_contents( $filepath, wp_remote_retrieve_body( $response ) );
+				}
 			}
 		}
 
