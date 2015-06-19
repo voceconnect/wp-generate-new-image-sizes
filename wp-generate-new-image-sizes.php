@@ -3,7 +3,7 @@
 Plugin Name: WP Generate New Image Sizes
 Plugin URI: http://voceconnect.com/
 Description: Generates new images added to the theme
-Version: 1.3.2
+Version: 1.3.3
 Author: Kevin Langley
 Author URI: http://voceconnect.com/
 */
