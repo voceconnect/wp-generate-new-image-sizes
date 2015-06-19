@@ -90,8 +90,7 @@ class WP_Generate_New_Image_Sizes {
 					if ( !file_exists( dirname($filepath) ) )
 						mkdir(dirname($filepath), 0777, true);
 
-					if ( is_writable($filepath) )
-						file_put_contents( $filepath, wp_remote_retrieve_body( $response ) );
+					file_put_contents( $filepath, wp_remote_retrieve_body( $response ) );
 				}
 			}
 		}
